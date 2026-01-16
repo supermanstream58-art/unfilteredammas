@@ -8,6 +8,9 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display&display=swap" rel="stylesheet">
 
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 <style>
   /* Global Styles */
   body {
@@ -91,6 +94,31 @@
     color: #55FF55;
     margin-bottom: 15px;
   }
+
+  /* Footer Social Links */
+  footer {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 30px;
+  }
+
+  footer a {
+    color: white;
+    font-size: 1.8em;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #FFAA33;
+  }
+
+  @media(max-width: 600px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; }
+    form { padding: 20px; }
+    footer { gap: 20px; }
+  }
 </style>
 </head>
 <body>
@@ -115,6 +143,19 @@
 
   <p id="formFeedback" class="success" style="display:none;">Thank you for sharing your story!</p>
 </form>
+
+<!-- Footer with Social Links -->
+<footer>
+  <a href="https://www.instagram.com/unfilteredammas" target="_blank" title="@unfilteredammas">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.tiktok.com/@unfilteredammas" target="_blank" title="@unfilteredammas">
+    <i class="fab fa-tiktok"></i>
+  </a>
+  <a href="https://www.youtube.com/@unfilteredammas" target="_blank" title="@unfilteredammas">
+    <i class="fab fa-youtube"></i>
+  </a>
+</footer>
 
 <script>
   const form = document.getElementById('storyForm');
