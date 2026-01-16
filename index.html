@@ -24,15 +24,29 @@
     min-height: 100vh;
   }
 
-  /* Top half background */
+  /* Top section with dimmed background */
   .top-section {
     width: 100%;
-    background: url('bg2.jpeg') no-repeat center top;
-    background-size: cover;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 100px 0 100px 0; /* increased top and bottom padding */
+    justify-content: center;
+    padding: 80px 0 80px 0;
+    overflow: hidden;
+  }
+
+  /* Background image with dim overlay */
+  .top-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px; /* smaller vertical height */
+    background: url('bg2.jpeg') center center / cover no-repeat;
+    filter: brightness(40%); /* dimmed */
+    z-index: -1;
   }
 
   h1 {
@@ -40,14 +54,15 @@
     font-size: 3em;
     color: #ffffff;
     text-transform: uppercase;
-    margin: 0 0 40px 0; /* large gap below title */
+    margin: 0;
+    line-height: 1.2;
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 0 0 60px 0; /* large gap below subtitle before form */
+    margin: 160px 0 80px 0; /* vertical spacing below title (~8 lines) */
   }
 
   form {
@@ -55,8 +70,8 @@
     flex-direction: column;
     width: 90%;
     max-width: 600px;
+    row-gap: 25px;
     z-index: 1;
-    row-gap: 25px; /* space between form fields */
   }
 
   input[type="text"], input[type="email"], textarea {
@@ -64,25 +79,24 @@
     color: #ffffff;
     border: 1px solid #555;
     border-radius: 5px;
-    padding: 15px; /* slightly bigger padding for spacing */
+    padding: 15px;
     font-size: 1em;
     resize: none;
     transition: 0.3s;
   }
 
-  /* Hover glow animation */
-  input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    outline: none;
-    border-color: #16a085;
-    box-shadow: 0 0 8px rgba(22, 160, 133, 0.7);
-  }
-
   textarea {
-    min-height: 220px; /* slightly bigger textarea */
+    min-height: 220px;
   }
 
   input::placeholder, textarea::placeholder {
     color: #ffffff;
+  }
+
+  input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    outline: none;
+    border-color: #16a085;
+    box-shadow: 0 0 8px rgba(22, 160, 133, 0.7);
   }
 
   button {
@@ -141,7 +155,7 @@
 
   @media(max-width: 600px) {
     h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.6rem; }
+    h2 { font-size: 1.6rem; margin-top: 120px; margin-bottom: 60px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
   }
