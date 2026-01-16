@@ -27,12 +27,12 @@
   /* Top half background */
   .top-section {
     width: 100%;
-    background: url('bg2.jpeg') no-repeat center top;
+    background: url('bg.jpg') no-repeat center top;
     background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 0 60px 0;
+    padding: 100px 0 100px 0; /* increased top and bottom padding */
   }
 
   h1 {
@@ -40,14 +40,14 @@
     font-size: 3em;
     color: #ffffff;
     text-transform: uppercase;
-    margin: 0;
+    margin: 0 0 40px 0; /* large gap below title */
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 20px 0 40px 0;
+    margin: 0 0 60px 0; /* large gap below subtitle before form */
   }
 
   form {
@@ -56,6 +56,7 @@
     width: 90%;
     max-width: 600px;
     z-index: 1;
+    row-gap: 25px; /* space between form fields */
   }
 
   input[type="text"], input[type="email"], textarea {
@@ -63,8 +64,7 @@
     color: #ffffff;
     border: 1px solid #555;
     border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 15px; /* slightly bigger padding for spacing */
     font-size: 1em;
     resize: none;
     transition: 0.3s;
@@ -78,7 +78,7 @@
   }
 
   textarea {
-    min-height: 200px;
+    min-height: 220px; /* slightly bigger textarea */
   }
 
   input::placeholder, textarea::placeholder {
@@ -102,12 +102,12 @@
 
   .success {
     color: #55FF55;
-    margin-bottom: 15px;
+    margin-top: 15px;
   }
 
   /* Footer Social Links */
   footer {
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 30px;
     display: flex;
     gap: 50px;
@@ -142,7 +142,7 @@
   @media(max-width: 600px) {
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.6rem; }
-    form { padding: 20px; }
+    form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
   }
 </style>
