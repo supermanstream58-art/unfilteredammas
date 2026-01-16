@@ -12,7 +12,7 @@
     /* Global Styles */
     body {
       font-family: 'Roboto', sans-serif;
-      background: #000000; /* changed to black */
+      background: #000000; /* black background */
       color: #ffffff;       /* all text white */
       margin: 0;
       padding: 0;
@@ -25,14 +25,14 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      color: #ffffff; /* changed to white */
+      color: #ffffff;
       margin-top: 50px;
       font-size: 3rem;
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
-      color: #ffffff; /* changed to white */
+      color: #ffffff;
       font-size: 2rem;
       margin-bottom: 30px;
     }
@@ -45,23 +45,30 @@
       background: #111111; /* slightly lighter black for form background */
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1); /* subtle white shadow */
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
       gap: 15px;
     }
 
     input, textarea {
       padding: 12px;
       border-radius: 6px;
-      border: 1px solid #555; /* lighter border to be visible on black */
+      border: 1px solid #555; /* visible on black */
       font-size: 1rem;
       width: 100%;
       box-sizing: border-box;
       background: #000; /* input background black */
       color: #ffffff;  /* input text white */
+      resize: none;    /* disable resizing for all fields */
+    }
+
+    /* Specific size for 'Your story' textarea */
+    textarea {
+      min-height: 180px; /* large textarea */
+      max-height: 300px; /* optional maximum */
     }
 
     input::placeholder, textarea::placeholder {
-      color: #aaaaaa; /* placeholder text light grey */
+      color: #aaaaaa; /* placeholder text light gray */
     }
 
     input:focus, textarea:focus {
