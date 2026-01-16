@@ -34,18 +34,19 @@
     justify-content: center;
     padding: 80px 0 80px 0;
     overflow: hidden;
+    background: url('bg2.jpeg') center center / cover no-repeat;
   }
 
-  /* Background image with dim + fade overlay */
-  .top-section::before {
+  /* Overlay with dim + fade */
+  .top-section::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 300px; /* smaller vertical height */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,1)), url('bg2.jpeg') center center / cover no-repeat;
-    z-index: -1;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,1));
+    z-index: 0;
   }
 
   h1 {
@@ -53,15 +54,19 @@
     font-size: 3em;
     color: #ffffff;
     text-transform: uppercase;
-    margin: 0 0 40px 0; /* gap below title */
+    margin: 0 0 40px 0;
     line-height: 1.2;
+    z-index: 1;
+    position: relative;
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 160px 0 80px 0; /* large spacing for vertical separation */
+    margin: 160px 0 80px 0;
+    z-index: 1;
+    position: relative;
   }
 
   form {
@@ -71,6 +76,7 @@
     max-width: 600px;
     row-gap: 25px;
     z-index: 1;
+    position: relative;
   }
 
   input[type="text"], input[type="email"], textarea {
@@ -152,9 +158,15 @@
     color: #ffffff;
   }
 
+  /* Responsive adjustments */
+  @media(max-width: 900px) {
+    h1 { font-size: 2.6rem; }
+    h2 { font-size: 1.8rem; margin-top: 120px; margin-bottom: 60px; }
+  }
+
   @media(max-width: 600px) {
     h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.6rem; margin-top: 120px; margin-bottom: 60px; }
+    h2 { font-size: 1.6rem; margin-top: 100px; margin-bottom: 50px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
   }
@@ -163,7 +175,7 @@
 <body>
 
 <!-- Top Section with Background -->
-<div class="top-section">
+<div class="top-section" id="topSection">
   <h1>UNFILTEREDAMMAS</h1>
   <h2>Write your story</h2>
 
@@ -207,6 +219,14 @@
   const form = document.getElementById('storyForm');
   const feedback = document.getElementById('formFeedback');
 
+  // Mobile-friendly parallax
+  const topSection = document.getElementById('topSection');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    topSection.style.backgroundPosition = `center ${scrollY * 0.3}px`;
+  });
+
+  // Form submit
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
