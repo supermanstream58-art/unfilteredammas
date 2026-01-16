@@ -32,10 +32,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 0 60px 0; /* slightly shorter padding */
+    padding: 60px 0 60px 0;
     overflow: hidden;
-    background: url('bg2.jpeg') center center / cover no-repeat;
-    filter: brightness(1.1); /* slightly brighter */
+    background: url('bg2.jpeg') center top / cover no-repeat;
+    filter: brightness(1.15); /* slightly brighter */
   }
 
   /* Overlay with dim + fade */
@@ -65,7 +65,7 @@
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 120px 0 60px 0; /* shorter vertical spacing */
+    margin: 120px 0 60px 0;
     z-index: 1;
     position: relative;
   }
@@ -170,6 +170,12 @@
     h2 { font-size: 1.6rem; margin-top: 80px; margin-bottom: 40px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
+
+    /* Mobile background adjustments */
+    .top-section {
+      background-size: cover;
+      background-position: center top;
+    }
   }
 </style>
 </head>
@@ -220,11 +226,12 @@
   const form = document.getElementById('storyForm');
   const feedback = document.getElementById('formFeedback');
 
-  // Mobile-friendly parallax
+  // Enhanced mobile-friendly parallax
   const topSection = document.getElementById('topSection');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    topSection.style.backgroundPosition = `center ${scrollY * 0.3}px`;
+    // Stronger parallax effect
+    topSection.style.backgroundPosition = `center ${scrollY * 0.6}px`;
   });
 
   // Form submit
