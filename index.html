@@ -73,6 +73,11 @@
       color: green;
       font-weight: bold;
     }
+
+    /* Honeypot field invisible */
+    .honeypot {
+      display: none;
+    }
   </style>
 </head>
 
@@ -81,17 +86,19 @@
     <h1>Submit Your Story</h1>
 
     <form id="storyForm" action="https://formspree.io/f/mvzzzkbz" method="POST">
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" required>
+      <label for="name">Name (optional)</label>
+      <input type="text" name="name" id="name">
 
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" required>
+      <label for="email">Email (optional)</label>
+      <input type="email" name="email" id="email">
 
       <label for="message">Message</label>
       <textarea name="message" id="message" required></textarea>
 
-      <!-- Required for CAPTCHA + spam protection -->
-      <input type="hidden" name="_captcha" value="true">
+      <!-- Honeypot anti-spam -->
+      <label class="honeypot">Leave this empty
+        <input type="text" name="_gotcha">
+      </label>
 
       <button type="submit">Submit</button>
     </form>
