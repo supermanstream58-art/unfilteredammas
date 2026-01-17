@@ -50,6 +50,18 @@
     z-index: 0;
   }
 
+  /* Fade-in + slide-up animation for icon */
+  @keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* Centered icon below title */
   .top-icon {
     display: block;
@@ -58,6 +70,9 @@
     margin: 20px auto; /* center horizontally */
     z-index: 2;
     position: relative;
+    opacity: 0; /* start hidden */
+    animation: fadeSlideUp 1s ease forwards; /* fade in + slide up */
+    animation-delay: 0.5s; /* delay for smooth effect */
   }
 
   h1 {
@@ -75,7 +90,7 @@
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 40px 0 60px 0; /* space between icon and form */
+    margin: 40px 0 60px 0;
     z-index: 1;
     position: relative;
   }
@@ -196,7 +211,7 @@
 
   <h1>UNFILTEREDAMMAS</h1>
 
-  <!-- Centered icon below title -->
+  <!-- Centered icon below title with fade-in -->
   <img src="icon2.png" alt="Site Icon" class="top-icon">
 
   <h2>Write your story</h2>
