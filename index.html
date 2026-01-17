@@ -32,7 +32,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 0 60px 0;
+    padding: 40px 0 60px 0; /* moved icon up slightly */
     overflow: hidden;
     background: url('bg2.jpeg') center center / cover no-repeat;
     filter: brightness(1.1);
@@ -62,35 +62,24 @@
     }
   }
 
-  /* Centered icon below title */
+  /* Centered icon */
   .top-icon {
     display: block;
-    width: 120px; /* larger size */
+    width: 200px; /* increased size */
     height: auto;
-    margin: 20px auto; /* center horizontally */
+    margin: 0 auto 20px auto; /* center horizontally, small margin below */
     z-index: 2;
     position: relative;
     opacity: 0; /* start hidden */
-    animation: fadeSlideUp 1s ease forwards; /* fade in + slide up */
-    animation-delay: 0.5s; /* delay for smooth effect */
-  }
-
-  h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3em;
-    color: #ffffff;
-    text-transform: uppercase;
-    margin: 0 0 40px 0;
-    line-height: 1.2;
-    z-index: 1;
-    position: relative;
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 0.3s;
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 40px 0 60px 0;
+    margin: 20px 0 60px 0; /* spacing below icon */
     z-index: 1;
     position: relative;
   }
@@ -186,17 +175,15 @@
 
   /* Responsive adjustments */
   @media(max-width: 900px) {
-    h1 { font-size: 2.6rem; }
-    h2 { font-size: 1.8rem; margin-top: 40px; margin-bottom: 50px; }
-    .top-icon { width: 100px; }
+    h2 { font-size: 1.8rem; margin-top: 20px; margin-bottom: 50px; }
+    .top-icon { width: 160px; }
   }
 
   @media(max-width: 600px) {
-    h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.6rem; margin-top: 30px; margin-bottom: 40px; }
+    h2 { font-size: 1.6rem; margin-top: 15px; margin-bottom: 40px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
-    .top-icon { width: 80px; }
+    .top-icon { width: 130px; }
     .top-section {
       background-size: cover;
       background-position: center top;
@@ -209,9 +196,7 @@
 <!-- Top Section with Background -->
 <div class="top-section" id="topSection">
 
-  <h1>UNFILTEREDAMMAS</h1>
-
-  <!-- Centered icon below title with fade-in -->
+  <!-- Centered icon with title included -->
   <img src="icon2.png" alt="Site Icon" class="top-icon">
 
   <h2>Write your story</h2>
