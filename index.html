@@ -13,102 +13,112 @@
 
 <style>
   body {
-    margin: 0;
-    font-family: Arial, sans-serif;
     background-color: black;
     color: white;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
   }
 
-  /* Banner section */
-  .banner {
+  /* Top section with cropped background and fade */
+  .top-section {
+    width: 100%;
     position: relative;
-    width: 100%;
-    height: 400px; /* banner height */
-    overflow: hidden;
-  }
-
-  .banner-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('bg2.jpeg') center center / cover no-repeat;
-    filter: brightness(1.15);
-    will-change: transform;
-    z-index: 0;
-  }
-
-  .banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
-    z-index: 1;
-  }
-
-  .banner-content {
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 60px 0 60px 0;
+    overflow: hidden;
+    height: 350px; /* Cropped banner height */
+    background: url('bg2.jpeg') center top / cover no-repeat;
+    filter: brightness(1.15);
+  }
+
+  /* Overlay with dim + fade */
+  .top-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    text-align: center;
-    padding: 0 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,1));
+    z-index: 0;
+  }
+
+  h1, h2 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    transition: transform 0.3s, opacity 0.3s;
   }
 
   h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 3rem;
+    font-size: 3em;
+    color: #ffffff;
     text-transform: uppercase;
-    margin: 0 0 40px 0;
+    margin-bottom: 40px;
+    line-height: 1.2;
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 2rem;
-    margin: 0;
+    font-size: 2em;
+    color: #ffffff;
+    margin-top: 120px;
+    margin-bottom: 60px;
   }
 
   form {
-    margin: 60px auto;
     display: flex;
     flex-direction: column;
-    max-width: 600px;
     width: 90%;
-    gap: 20px;
+    max-width: 600px;
+    row-gap: 25px;
+    z-index: 1;
+    position: relative;
   }
 
-  input, textarea {
-    padding: 15px;
-    border-radius: 5px;
+  input[type="text"], input[type="email"], textarea {
+    background-color: #222;
+    color: #ffffff;
     border: 1px solid #555;
-    background: #222;
-    color: #fff;
-    font-size: 1rem;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 1em;
     resize: none;
+    transition: 0.3s;
   }
 
   textarea {
-    min-height: 200px;
+    min-height: 220px;
   }
 
-  ::placeholder {
-    color: white;
+  input::placeholder, textarea::placeholder {
+    color: #ffffff;
+  }
+
+  input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    outline: none;
+    border-color: #16a085;
+    box-shadow: 0 0 8px rgba(22, 160, 133, 0.7);
   }
 
   button {
     background-color: #16a085;
+    border: none;
     color: white;
     padding: 15px;
-    border: none;
+    font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
+    transition: 0.3s;
   }
 
   button:hover {
@@ -118,14 +128,15 @@
   .success {
     color: #55FF55;
     margin-top: 15px;
-    text-align: center;
   }
 
+  /* Footer Social Links */
   footer {
+    margin-top: 70px;
+    margin-bottom: 30px;
     display: flex;
-    justify-content: center;
     gap: 50px;
-    margin: 50px 0;
+    justify-content: center;
     flex-wrap: wrap;
   }
 
@@ -133,116 +144,134 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    text-align: center;
   }
 
   .social a {
-    font-size: 2em;
     color: white;
+    font-size: 2.2em;
     text-decoration: none;
-  }
-
-  .social span {
-    margin-top: 5px;
-    font-size: 0.9em;
+    transition: 0.3s;
   }
 
   .social a:hover {
     color: #16a085;
   }
 
+  .social span {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #ffffff;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 900px) {
+    h1 { font-size: 2.6rem; }
+    h2 { font-size: 1.8rem; margin-top: 100px; margin-bottom: 50px; }
+  }
+
   @media(max-width: 600px) {
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
-    .banner { height: 300px; }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; margin-top: 80px; margin-bottom: 40px; }
+    form { padding: 20px; row-gap: 20px; }
+    footer { gap: 30px; }
+    .top-section {
+      background-size: cover;
+      background-position: center top;
+      height: 300px; /* crop a bit more for mobile */
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="banner">
-  <div class="banner-bg" id="bannerBg"></div>
-  <div class="banner-overlay"></div>
-  <div class="banner-content">
-    <h1 id="title">UNFILTEREDAMMAS</h1>
-    <h2 id="subtitle">Write your story</h2>
-  </div>
+<!-- Top Section with Background -->
+<div class="top-section" id="topSection">
+  <h1 id="title">UNFILTEREDAMMAS</h1>
+  <h2 id="subtitle">Write your story</h2>
+
+  <form id="storyForm" action="https://formspree.io/f/mvzzzkbz" method="POST">
+    <!-- Honeypot field -->
+    <input type="text" name="_gotcha" style="display:none">
+
+    <input type="text" name="name" placeholder="Name (optional)">
+    <input type="email" name="email" placeholder="Email (optional)">
+    <textarea name="message" placeholder="Your Story" minlength="50" required></textarea>
+
+    <button type="submit">Submit</button>
+
+    <p id="formFeedback" class="success" style="display:none;">Thank you for sharing your story!</p>
+  </form>
 </div>
 
-<form id="storyForm" action="https://formspree.io/f/mvzzzkbz" method="POST">
-  <input type="text" name="_gotcha" style="display:none">
-  <input type="text" name="name" placeholder="Name (optional)">
-  <input type="email" name="email" placeholder="Email (optional)">
-  <textarea name="message" placeholder="Your Story" minlength="50" required></textarea>
-  <button type="submit">Submit</button>
-  <p id="formFeedback" class="success" style="display:none;">Thank you for sharing your story!</p>
-</form>
-
+<!-- Footer with Social Links -->
 <footer>
   <div class="social">
-    <a href="https://www.instagram.com/unfilteredammas" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.instagram.com/unfilteredammas" target="_blank" title="@unfilteredammas">
+      <i class="fab fa-instagram"></i>
+    </a>
     <span>Instagram</span>
   </div>
   <div class="social">
-    <a href="https://www.tiktok.com/@unfilteredammas" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.tiktok.com/@unfilteredammas" target="_blank" title="@unfilteredammas">
+      <i class="fab fa-tiktok"></i>
+    </a>
     <span>TikTok</span>
   </div>
   <div class="social">
-    <a href="https://www.youtube.com/@unfilteredammas" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.youtube.com/@unfilteredammas" target="_blank" title="@unfilteredammas">
+      <i class="fab fa-youtube"></i>
+    </a>
     <span>YouTube</span>
   </div>
 </footer>
 
 <script>
-const form = document.getElementById('storyForm');
-const feedback = document.getElementById('formFeedback');
-const bannerBg = document.getElementById('bannerBg');
-const title = document.getElementById('title');
-const subtitle = document.getElementById('subtitle');
+  const form = document.getElementById('storyForm');
+  const feedback = document.getElementById('formFeedback');
 
-let lastScroll = 0;
-let ticking = false;
+  const topSection = document.getElementById('topSection');
+  const title = document.getElementById('title');
+  const subtitle = document.getElementById('subtitle');
 
-window.addEventListener('scroll', () => {
-  lastScroll = window.scrollY;
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      // Smooth parallax using transform
-      bannerBg.style.transform = `translateY(${lastScroll * 0.3}px)`;
+  // Parallax + title/subtitle fade
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
 
-      // Title/subtitle animation
-      title.style.transform = `translateY(${lastScroll * -0.1}px)`;
-      subtitle.style.transform = `translateY(${lastScroll * -0.15}px)`;
-      title.style.opacity = `${Math.max(1 - lastScroll / 400, 0)}`;
-      subtitle.style.opacity = `${Math.max(1 - lastScroll / 300, 0)}`;
+    // Background parallax (subtle)
+    topSection.style.backgroundPosition = `center ${scrollY * 0.4}px`;
 
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
-
-// Form submission
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  const message = form.message.value.trim();
-  if (message.length < 50) {
-    alert("Your story must be at least 50 characters long.");
-    return;
-  }
-  const formData = new FormData(form);
-  const response = await fetch(form.action, {
-    method: form.method,
-    body: formData,
-    headers: { 'Accept': 'application/json' }
+    // Title/subtitle fade and move
+    title.style.transform = `translateY(${scrollY * -0.15}px)`;
+    subtitle.style.transform = `translateY(${scrollY * -0.2}px)`;
+    title.style.opacity = `${Math.max(1 - scrollY / 400, 0)}`;
+    subtitle.style.opacity = `${Math.max(1 - scrollY / 300, 0)}`;
   });
-  if (response.ok) {
-    feedback.style.display = "block";
-    form.reset();
-  } else {
-    alert("Oops! There was a problem submitting your story.");
-  }
-});
+
+  // Form submit
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const message = form.message.value.trim();
+    if (message.length < 50) {
+      alert("Your story must be at least 50 characters long.");
+      return;
+    }
+
+    const formData = new FormData(form);
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      feedback.style.display = "block";
+      form.reset();
+    } else {
+      alert("Oops! There was a problem submitting your story.");
+    }
+  });
 </script>
 
 </body>
