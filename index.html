@@ -32,20 +32,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 0 60px 0; /* slightly shorter padding */
+    padding: 60px 0 60px 0;
     overflow: hidden;
     background: url('bg2.jpeg') center center / cover no-repeat;
-    filter: brightness(1.1); /* slightly brighter */
-  }
-
-  /* Top-left icon */
-  .top-icon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 50px;   /* adjust as needed */
-    height: 50px;
-    z-index: 3;
+    filter: brightness(1.1);
   }
 
   /* Overlay with dim + fade */
@@ -58,6 +48,16 @@
     height: 100%;
     background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,1));
     z-index: 0;
+  }
+
+  /* Centered icon below title */
+  .top-icon {
+    display: block;
+    width: 120px; /* larger size */
+    height: auto;
+    margin: 20px auto; /* center horizontally */
+    z-index: 2;
+    position: relative;
   }
 
   h1 {
@@ -75,7 +75,7 @@
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin: 120px 0 60px 0; /* shorter vertical spacing */
+    margin: 40px 0 60px 0; /* space between icon and form */
     z-index: 1;
     position: relative;
   }
@@ -172,14 +172,20 @@
   /* Responsive adjustments */
   @media(max-width: 900px) {
     h1 { font-size: 2.6rem; }
-    h2 { font-size: 1.8rem; margin-top: 100px; margin-bottom: 50px; }
+    h2 { font-size: 1.8rem; margin-top: 40px; margin-bottom: 50px; }
+    .top-icon { width: 100px; }
   }
 
   @media(max-width: 600px) {
     h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.6rem; margin-top: 80px; margin-bottom: 40px; }
+    h2 { font-size: 1.6rem; margin-top: 30px; margin-bottom: 40px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
+    .top-icon { width: 80px; }
+    .top-section {
+      background-size: cover;
+      background-position: center top;
+    }
   }
 </style>
 </head>
@@ -187,10 +193,12 @@
 
 <!-- Top Section with Background -->
 <div class="top-section" id="topSection">
-  <!-- Top-left icon -->
-  <img src="icon2.png" alt="Site Icon" class="top-icon">
 
   <h1>UNFILTEREDAMMAS</h1>
+
+  <!-- Centered icon below title -->
+  <img src="icon2.png" alt="Site Icon" class="top-icon">
+
   <h2>Write your story</h2>
 
   <form id="storyForm" action="https://formspree.io/f/mvzzzkbz" method="POST">
@@ -233,7 +241,6 @@
   const form = document.getElementById('storyForm');
   const feedback = document.getElementById('formFeedback');
 
-  // Mobile-friendly parallax
   const topSection = document.getElementById('topSection');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
