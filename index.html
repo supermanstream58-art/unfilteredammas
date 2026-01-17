@@ -38,6 +38,16 @@
     filter: brightness(1.1); /* slightly brighter */
   }
 
+  /* Top-left icon */
+  .top-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;   /* adjust as needed */
+    height: 50px;
+    z-index: 3;
+  }
+
   /* Overlay with dim + fade */
   .top-section::after {
     content: "";
@@ -177,6 +187,9 @@
 
 <!-- Top Section with Background -->
 <div class="top-section" id="topSection">
+  <!-- Top-left icon -->
+  <img src="icon2.png" alt="Site Icon" class="top-icon">
+
   <h1>UNFILTEREDAMMAS</h1>
   <h2>Write your story</h2>
 
