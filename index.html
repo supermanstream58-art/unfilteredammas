@@ -24,7 +24,7 @@
     min-height: 100vh;
   }
 
-  /* Top section with cropped background and fade */
+  /* Top section with background and fade */
   .top-section {
     width: 100%;
     position: relative;
@@ -32,11 +32,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 0 60px 0;
+    padding: 60px 0 60px 0; /* slightly shorter padding */
     overflow: hidden;
-    height: 350px; /* Cropped banner height */
-    background: url('bg2.jpeg') center top / cover no-repeat;
-    filter: brightness(1.15);
+    background: url('bg2.jpeg') center center / cover no-repeat;
+    filter: brightness(1.1); /* slightly brighter */
   }
 
   /* Overlay with dim + fade */
@@ -51,28 +50,24 @@
     z-index: 0;
   }
 
-  h1, h2 {
-    position: relative;
-    z-index: 1;
-    margin: 0;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-
   h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 3em;
     color: #ffffff;
     text-transform: uppercase;
-    margin-bottom: 40px;
+    margin: 0 0 40px 0;
     line-height: 1.2;
+    z-index: 1;
+    position: relative;
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
     color: #ffffff;
-    margin-top: 120px;
-    margin-bottom: 60px;
+    margin: 120px 0 60px 0; /* shorter vertical spacing */
+    z-index: 1;
+    position: relative;
   }
 
   form {
@@ -175,11 +170,6 @@
     h2 { font-size: 1.6rem; margin-top: 80px; margin-bottom: 40px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
-    .top-section {
-      background-size: cover;
-      background-position: center top;
-      height: 300px; /* crop a bit more for mobile */
-    }
   }
 </style>
 </head>
@@ -187,8 +177,8 @@
 
 <!-- Top Section with Background -->
 <div class="top-section" id="topSection">
-  <h1 id="title">UNFILTEREDAMMAS</h1>
-  <h2 id="subtitle">Write your story</h2>
+  <h1>UNFILTEREDAMMAS</h1>
+  <h2>Write your story</h2>
 
   <form id="storyForm" action="https://formspree.io/f/mvzzzkbz" method="POST">
     <!-- Honeypot field -->
@@ -230,22 +220,11 @@
   const form = document.getElementById('storyForm');
   const feedback = document.getElementById('formFeedback');
 
+  // Mobile-friendly parallax
   const topSection = document.getElementById('topSection');
-  const title = document.getElementById('title');
-  const subtitle = document.getElementById('subtitle');
-
-  // Parallax + title/subtitle fade
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-
-    // Background parallax (subtle)
-    topSection.style.backgroundPosition = `center ${scrollY * 0.4}px`;
-
-    // Title/subtitle fade and move
-    title.style.transform = `translateY(${scrollY * -0.15}px)`;
-    subtitle.style.transform = `translateY(${scrollY * -0.2}px)`;
-    title.style.opacity = `${Math.max(1 - scrollY / 400, 0)}`;
-    subtitle.style.opacity = `${Math.max(1 - scrollY / 300, 0)}`;
+    topSection.style.backgroundPosition = `center ${scrollY * 0.3}px`;
   });
 
   // Form submit
