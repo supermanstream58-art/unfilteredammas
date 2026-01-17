@@ -24,7 +24,7 @@
     min-height: 100vh;
   }
 
-  /* Top section with background and fade */
+  /* Top section with banner background */
   .top-section {
     width: 100%;
     position: relative;
@@ -32,9 +32,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 0 60px 0;
+    height: 450px; /* banner-style height */
     overflow: hidden;
-    background: url('bg2.jpeg') center top / cover no-repeat;
+    background: url('bg2.jpeg') center center / cover no-repeat;
     filter: brightness(1.15);
   }
 
@@ -167,6 +167,7 @@
   @media(max-width: 900px) {
     h1 { font-size: 2.6rem; }
     h2 { font-size: 1.8rem; margin-top: 100px; margin-bottom: 50px; }
+    .top-section { height: 400px; }
   }
 
   @media(max-width: 600px) {
@@ -174,10 +175,7 @@
     h2 { font-size: 1.6rem; margin-top: 80px; margin-bottom: 40px; }
     form { padding: 20px; row-gap: 20px; }
     footer { gap: 30px; }
-    .top-section {
-      background-size: cover;
-      background-position: center top;
-    }
+    .top-section { height: 350px; background-size: cover; background-position: center top; }
   }
 </style>
 </head>
@@ -232,18 +230,29 @@
   const title = document.getElementById('title');
   const subtitle = document.getElementById('subtitle');
 
-  // Enhanced parallax + title/subtitle fade and move
+  // Smooth parallax using requestAnimationFrame
+  let latestScrollY = 0;
+  let ticking = false;
+
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
+    latestScrollY = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scroll = latestScrollY;
 
-    // Background parallax (stronger)
-    topSection.style.backgroundPosition = `center ${scrollY * 0.6}px`;
+        // Parallax background
+        topSection.style.backgroundPosition = `center ${scroll * 0.5}px`;
 
-    // Title/subtitle fade and move up
-    title.style.transform = `translateY(${scrollY * -0.2}px)`;
-    subtitle.style.transform = `translateY(${scrollY * -0.3}px)`;
-    title.style.opacity = `${Math.max(1 - scrollY / 400, 0)}`;
-    subtitle.style.opacity = `${Math.max(1 - scrollY / 300, 0)}`;
+        // Title & subtitle animation
+        title.style.transform = `translateY(${scroll * -0.15}px)`;
+        subtitle.style.transform = `translateY(${scroll * -0.25}px)`;
+        title.style.opacity = `${Math.max(1 - scroll / 400, 0)}`;
+        subtitle.style.opacity = `${Math.max(1 - scroll / 300, 0)}`;
+
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 
   // Form submit
