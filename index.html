@@ -30,8 +30,20 @@
     padding: 40px 0 60px 0;
   }
 
+  @keyframes fadeSlideUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-item { opacity: 0; }
+  .fade-item.fade-in { animation: fadeSlideUp 1s forwards; }
+  .fade-item.icon { animation-delay: 0.3s; }
+  .fade-item.subtitle { animation-delay: 0.8s; }
+  .fade-item.form { animation-delay: 1.3s; }
+
   .top-icon { width: 460px; height: auto; margin-bottom: 20px; }
   h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 2em; color: #cdaf8b; margin: 20px 0 60px 0; text-align: center; }
+
   form { display: flex; flex-direction: column; width: 90%; max-width: 600px; row-gap: 25px; }
   textarea { background-color: #fafafa; color: #2b2b2b; border: 1px solid #cdaf8b; border-radius: 5px; padding: 15px; font-size: 1em; resize: none; min-height: 220px; transition: 0.3s; }
   textarea::placeholder { color: #9a9a9a; }
@@ -39,30 +51,27 @@
   button { background-color: #cdaf8b; border: none; color: white; padding: 15px; font-size: 1em; border-radius: 5px; cursor: pointer; transition: 0.3s; }
   button:hover { background-color: #b89a73; }
   .success { color: #cdaf8b; margin-top: 15px; text-align: center; display: none; }
+
+  @media(max-width: 900px) { h2 { font-size: 1.8rem; } .top-icon { width: 345px; } }
+  @media(max-width: 600px) { h2 { font-size: 1.6rem; } form { padding: 20px; } .top-icon { width: 253px; } }
 </style>
 </head>
 <body>
 
 <div class="top-section">
-  <img src="icon4.png" alt="Site Icon" class="top-icon">
-
-  <h2>Write your story</h2>
+  <img src="icon4.png" alt="Site Icon" class="top-icon fade-item icon">
+  <h2 class="fade-item subtitle">Write your story</h2>
 
   <form
-    action="https://formsubmit.co/Unfilteredammas@gmail.com"
+    action="https://formsubmit.co/b7a70b5503c9dc0e1ff2ec03eeb84d08"
     method="POST"
+    class="fade-item form"
   >
-    <!-- Optional email subject -->
     <input type="hidden" name="_subject" value="New Anonymous Story Submission">
-
-    <!-- Redirect back to same page after submission -->
     <input type="hidden" name="_next" value="https://unfilteredammas.com/?success=true">
-
-    <!-- Disable Captcha -->
     <input type="hidden" name="_captcha" value="false">
 
     <textarea name="message" placeholder="Your Story" minlength="50" required></textarea>
-
     <button type="submit">Submit</button>
   </form>
 
@@ -70,14 +79,21 @@
 </div>
 
 <script>
-  // Show success message if URL has ?success=true
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('success') === 'true') {
-    const feedback = document.getElementById('formFeedback');
-    feedback.style.display = 'block';
-    document.querySelector('textarea').value = '';
-    setTimeout(() => { feedback.style.display = 'none'; }, 4000);
-  }
+  // Fade in elements on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fade-item').forEach(el => el.classList.add('fade-in'));
+
+    // Show success message if redirected with ?success=true
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      const feedback = document.getElementById('formFeedback');
+      feedback.style.display = 'block';
+      document.querySelector('textarea').value = '';
+      setTimeout(() => { feedback.style.display = 'none'; }, 4000);
+      // Remove ?success=true from URL without reloading
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  });
 </script>
 
 </body>
