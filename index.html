@@ -118,8 +118,11 @@
     <!-- Optional email subject -->
     <input type="hidden" name="_subject" value="New Anonymous Story Submission">
 
-    <!-- Redirect to same page after submission -->
-    <input type="hidden" name="_next" value="">
+    <!-- Redirect back to current page -->
+    <input type="hidden" name="_next" value="https://unfilteredammas.com/">
+
+    <!-- Disable Captcha -->
+    <input type="hidden" name="_captcha" value="false">
 
     <textarea name="message" placeholder="Your Story" minlength="50" required></textarea>
 
@@ -158,7 +161,6 @@
       feedback.style.display = "block";
       form.reset();
 
-      // Auto-hide success message after 4 seconds
       setTimeout(() => { feedback.style.display = "none"; }, 4000);
     } else {
       alert("Oops! There was a problem submitting your story.");
