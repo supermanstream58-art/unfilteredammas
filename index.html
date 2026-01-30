@@ -8,13 +8,10 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display&display=swap" rel="stylesheet">
 
-<!-- Font Awesome for social icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
- 
 <style>
   body {
-    background-color: white; /* CHANGED */
-    color: white;
+    background-color: white;
+    color: #2b2b2b;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -26,7 +23,6 @@
 
   .top-section {
     width: 100%;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,19 +31,12 @@
   }
 
   @keyframes fadeSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
   .fade-item {
     opacity: 0;
-    position: relative;
   }
 
   .fade-item.fade-in {
@@ -59,17 +48,15 @@
   .fade-item.form { animation-delay: 1.3s; }
 
   .top-icon {
-    display: block;
-    width: 460px; /* +15% */
+    width: 460px;
     height: auto;
-    margin: 0 auto 20px auto;
-    z-index: 2;
+    margin-bottom: 20px;
   }
 
   h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2em;
-    color: #ffffff;
+    color: #cdaf8b;
     margin: 20px 0 60px 0;
     text-align: center;
   }
@@ -83,9 +70,9 @@
   }
 
   textarea {
-    background-color: #222;
-    color: #ffffff;
-    border: 1px solid #555;
+    background-color: #fafafa;
+    color: #2b2b2b;
+    border: 1px solid #cdaf8b;
     border-radius: 5px;
     padding: 15px;
     font-size: 1em;
@@ -94,16 +81,18 @@
     transition: 0.3s;
   }
 
-  textarea::placeholder { color: #ffffff; }
+  textarea::placeholder {
+    color: #9a9a9a;
+  }
 
   textarea:focus {
     outline: none;
-    border-color: #16a085;
-    box-shadow: 0 0 8px rgba(22, 160, 133, 0.7);
+    border-color: #cdaf8b;
+    box-shadow: 0 0 8px rgba(205, 175, 139, 0.5);
   }
 
   button {
-    background-color: #16a085;
+    background-color: #cdaf8b;
     border: none;
     color: white;
     padding: 15px;
@@ -113,22 +102,24 @@
     transition: 0.3s;
   }
 
-  button:hover { background-color: #13856f; }
+  button:hover {
+    background-color: #b89a73;
+  }
 
   .success {
-    color: #55FF55;
+    color: #cdaf8b;
     margin-top: 15px;
   }
 
   @media(max-width: 900px) {
     h2 { font-size: 1.8rem; }
-    .top-icon { width: 345px; } /* +15% */
+    .top-icon { width: 345px; }
   }
 
   @media(max-width: 600px) {
     h2 { font-size: 1.6rem; }
     form { padding: 20px; }
-    .top-icon { width: 253px; } /* +15% */
+    .top-icon { width: 253px; }
   }
 </style>
 </head>
@@ -146,6 +137,7 @@
     <button type="submit">Submit</button>
     <p id="formFeedback" class="success" style="display:none;">Thank you for sharing your story!</p>
   </form>
+
 </div>
 
 <script>
@@ -158,16 +150,17 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const message = form.message.value.trim();
-    if (message.length < 50) {
+    if (form.message.value.trim().length < 50) {
       alert("Your story must be at least 50 characters long.");
       return;
     }
+
     const response = await fetch(form.action, {
       method: form.method,
       body: new FormData(form),
       headers: { 'Accept': 'application/json' }
     });
+
     if (response.ok) {
       feedback.style.display = "block";
       form.reset();
