@@ -115,17 +115,11 @@
     method="POST"
     class="fade-item form"
   >
-    <!-- Honeypot (anti-spam) -->
-    <input type="text" name="_honey" style="display:none">
-
-    <!-- Redirect to same page (optional) -->
-    <input type="hidden" name="_next" value="">
-
-    <!-- Enable CAPTCHA -->
-    <input type="hidden" name="_captcha" value="true">
-
     <!-- Optional email subject -->
     <input type="hidden" name="_subject" value="New Anonymous Story Submission">
+
+    <!-- Redirect to same page after submission -->
+    <input type="hidden" name="_next" value="">
 
     <textarea name="message" placeholder="Your Story" minlength="50" required></textarea>
 
@@ -165,9 +159,7 @@
       form.reset();
 
       // Auto-hide success message after 4 seconds
-      setTimeout(() => {
-        feedback.style.display = "none";
-      }, 4000);
+      setTimeout(() => { feedback.style.display = "none"; }, 4000);
     } else {
       alert("Oops! There was a problem submitting your story.");
     }
